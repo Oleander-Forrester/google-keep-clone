@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import './Note.css';
 
 function Note({ note, updateNote, deleteNote }) {
-    // State untuk melacak note sedang diedit
     const [isEditing, setIsEditing] = useState(false);
     const [editTitle, setEditTitle] = useState(note.title);
     const [editContent, setEditContent] = useState(note.content);
-
-    // Simpan editan note
+    
     const handleSave = () => {
         updateNote(note.id, {
             ...note,
@@ -17,14 +15,12 @@ function Note({ note, updateNote, deleteNote }) {
         setIsEditing(false);
     };
 
-    // Batal edit dan kembalikan nilai asli
     const handleCancel = () => {
         setEditTitle(note.title);
         setEditContent(note.content);
         setIsEditing(false);
     };
 
-    // Hapus note dengan konfirmasi
     const handleDelete = () => {
         if (window.confirm('Are you sure you want to delete this note?')) {
             deleteNote(note.id);
@@ -34,7 +30,6 @@ function Note({ note, updateNote, deleteNote }) {
     return (
         <div className="note">
             {isEditing ? (
-                // Edit Mode
                 <div className="note-edit">
                     <input
                         type="text"
@@ -61,14 +56,13 @@ function Note({ note, updateNote, deleteNote }) {
                     </div>
                 </div>
             ) : (
-                // View Mode
                 <div className="note-view" onClick={() => setIsEditing(true)}>
                     {note.title && <h3 className="note-title">{note.title}</h3>}
                     <p className="note-content">{note.content}</p>
                     <div className="note-actions">
                         <button
                             onClick={(e) => {
-                                e.stopPropagation(); // Mencegah trigger edit mode
+                                e.stopPropagation();
                                 handleDelete();
                             }}
                             className="note-delete"

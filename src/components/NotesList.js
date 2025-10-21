@@ -3,7 +3,6 @@ import Note from './Note';
 import './NotesList.css';
 
 function NotesList({ notes, updateNote, deleteNote }) {
-    // Tampilkan pesan jika tidak ada notes
     if (notes.length === 0) {
         return (
             <div className="notes-empty">
